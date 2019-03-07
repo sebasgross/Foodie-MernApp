@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  padding: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.home-button{
+  height: 50px;
+  
+}
+.home-container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+.home-card{
+  height: 300px;
+  width: 200px;
+}
+.product-container{
+  display: flex;
+  justify-content: center;
+  
+  padding: 10px;
+  
+}
+.product-card{
+  height: 450px;
+  width: 450px;
+  border: 1px solid black;
+  padding: 5px;
+}
+.profile-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+  
+}
+.profile-card{
+  height: 250px;
+  width: 250px;
+  border: 1px solid black;
+  padding: 5px;
+}
+.detail-type{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.detail-pickup{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.login-card{
+  display:flex;
+  flex-direction: column;
+  
+}
+.signup-input{
+  width: 25%;
+  align-self: center;
+  margin: 2.5px;
+}
+@media(max-width:600px){
+  .signup-input{
+    width: 50%;
+  }
+}
+.login-card > input{
+  padding-top: 5px;
+}
+.icons{
+
+  margin-left: 5px;
+
+}
