@@ -28,8 +28,7 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 const app = express();
 
 //cors config
-app.use(cors({
-  origin: "*",
+app.use(cors({ 
   credentials: true,
   origin: true
 }))

@@ -1,13 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { Card } from 'antd';
 
 
-const gridStyle = {
-    width: '40%',
-    textAlign: 'center',
-  };
+
 
 class Home extends React.Component{
     state={
@@ -26,28 +22,32 @@ class Home extends React.Component{
         .catch((err)=>console.log(err))
     }
     render(){
-        const {products} = this.state
+        const {products,user} = this.state
         console.log(products)
-        if(products.length === 0) return <div>No products</div>
+        if(products.length === 0 || !user) return <div><img height="200"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>
         return(
-            <div className="home-container">
-
+            <div className="home">
+            <h1>Today's Menu</h1>
+                <div className="home-container"> 
                       {products.map((product)=>{
                 return(
-                    <div key={product._id} >
 
+                    <div key={product._id} className="home-available" >
                <Link to={`detail/${product._id}`}>
-               <Card title="Plate">                   
-                    <Card.Grid style={gridStyle}>Chef: {product.seller.username}</Card.Grid>
-                    {/* <Card.Grid style={gridStyle}></Card.Grid> */}
-                    <Card.Grid style={gridStyle}>Type: {product.type}</Card.Grid>
-                    <Card.Grid style={gridStyle}>Cuisine: {product.cuisine}</Card.Grid>
-                    <p>Are you interested? Click plate for details</p>
-                </Card>
+               <div className="home-plate">    
+                    <h2>Plate</h2>                
+                    <h3>Chef: <b>{product.seller.username}</b></h3>
+                    <img height="80"src={product.picture} alt=""/>
+                    <p># <b>{product.type}</b></p>
+                    <p>Exquisite <b>{product.cuisine}</b> cuisine</p>
+                    <p>Are you interested? Click me for details</p>
+                </div>
                 </Link> 
                     </div>
+
                 )
             })}
+            </div>
             </div>
         )
     }

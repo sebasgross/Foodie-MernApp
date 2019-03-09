@@ -51,13 +51,22 @@ router.post("/signup", (req, res, next) => {
 router.post("/chef/signup", (req, res, next) => {
   // console.log("hola")
   User.register(req.body, req.body.password)
-
     .then(user => {
       // console.log(user)
       res.status(201).json(user);
     })
     .catch(e => next(e));
 });
+//Editar addreess para user
+router.post('/address/user',isAuth,(req,res,next)=>{
+  
+  User.findByIdAndUpdate(req.user._id, { $set: { ...req.body } }, { new: true })
+  // console.log(req.body)
+  .then((res)=>{
+    res.status(200).json(res)
+  })
+  .catch((e)=>console.log(e))
+})
 
 //logout
 router.get("/logout", isAuth, (req, res, next) => {
@@ -70,20 +79,26 @@ router.get("/logout", isAuth, (req, res, next) => {
         .clearCookie("connect.sid", { path: "/" })
         .json({ message: "Logout successful" });
     }
+    if(!req.user) res.redirect('/login')
+
   });
 });
 
 //login
 router.post("/login", passport.authenticate("local",{ failureRedirect: "/login" }), (req, res, next) => {
   res.status(200).json(req.user);
+  // res.redirect('/profile')
 });
 
 //private profile
 router.get('/profile', isAuth,(req,res,next)=>{
   if(!req.user) res.redirect('/login')
+  // console.log(req.user._id)
   User.findById(req.user._id)
+  .populate('products')
   // Product.find({seller:req.user._id})
   .then((user)=>{
+    console.log(user.products)
     res.status(200).json(user)
   })
   .catch(e=>next(e))
@@ -92,11 +107,12 @@ router.get('/profile', isAuth,(req,res,next)=>{
 router.get('/profile/products',isAuth,(req,res,next)=>{
     Product.find({seller:req.user._id})
     .then((product)=>{
-      res.status(200).json({product, user: req.user})
+      res.status(200).json({product})
     })
     .catch((e)=>next(e))
 })
-//image
+
+// //image
 router.get('/image',isAuth,(req,res,next)=>{
   Product.findById(req.user._id)
   then((post)=>{
@@ -123,30 +139,33 @@ router.get('/detail/:id', isAuth ,(req,res,next)=>{
   
   Product.findById(id)
   .then((p)=>{
-    console.log(p)
-    res.status(200).json(p)
+    res.status(200).json({p, user: req.user})
   })
   .catch((e)=>next(e))
 })
-router.post('/detail/:id',isAuth,(req,res,next)=>{
+
+router.post('/detail/:id',isAuth ,(req,res,next)=>{
   const {id} = req.params
+  // console.log(id)
   
-  Product.findByIdAndUpdate(id,{$inc: {quantity: -1 }}, {new: true})
-  
-  .then(p => {
-    console.log(p._id)
-    // Promise.all([
-      User.findByIdAndUpdate(p.seller, { $push: { products: p._id } }, {new: true})
-      .then(p=>{
+  Product.findByIdAndUpdate(id,{$inc: {quantity: -1 }, active: true, buyer:req.user._id}, {new: true})
+  .populate('seller')
+
+  .then((p) => {
+   // console.log(p.seller._id)
       User.findByIdAndUpdate(req.user._id, { $push: { products: p._id } }, {new: true})
+      .then((x)=>{
+      
+      res.status(200).json(x)
+      User.findByIdAndUpdate(p.seller, { $push: { products: p._id } }, {new: true})
+      .then((p)=>{
+        res.tatus(200).json(p)
       })
-    // ])
-    .then(res => {
-      res.send()
-    })
-  })
-  .catch(e=>console.log(e))
 })
+.catch(e=>console.log(e))
+})
+})
+
 router.post('/imageProfile',isAuth, uploadCloud.single('picture'), (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, {profilePic: req.file.url})
     .then( user => {

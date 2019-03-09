@@ -2,10 +2,11 @@ import React from 'react'
 import axios from 'axios'
 
 
-
+// const {id} = this.state.product
 class Detail extends React.Component{
     state={
-        product:{}
+        product:{},
+        userloggued: {}
     }
 
     componentDidMount(){
@@ -14,17 +15,23 @@ class Detail extends React.Component{
 
         axios.get(url, {withCredentials:true})
         .then((product)=>{
-            console.log(product.data)
-            this.setState({product:product.data})
+            console.log(product)
+            this.setState({product:product.data.p,id:product.data.p._id, userloggued: product.data.user })
+            console.log(product.data._id)
+
         })
         .catch(err=>console.log(err))
     }
-    addRequest(props){
+     addRequest = ()=>{
+        // // let { id } = this.state
+        // const url= `http://localhost:3000/detail/` + id
         let { id } = this.props.match.params
+        const {user} =this.state
         const url= `http://localhost:3000/detail/${id}`
-        axios.post(url,{withCredentials:true})
+        axios.post(url, user, {withCredentials: true})
         .then(()=>{
-            // this.props.history.push('/profile')
+            console.log('jola')
+            this.props.history.push('/profile')
         })
         .catch((e)=>console.log(e))
     }

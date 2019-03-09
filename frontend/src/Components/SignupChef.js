@@ -24,7 +24,7 @@ class SignupChef extends Component{
         let url = "http://localhost:3000/chef/signup"
         axios.post(url,newUser)
         .then(user=>{
-            console.log(user)
+           
             this.props.history.push('/login')
         })
         .catch(e=>console.log(e))
@@ -37,22 +37,24 @@ class SignupChef extends Component{
             <div className="login-container">
             <div className="main-card">
             <div className="login-card">
-            <h2>Sign up for Chef position</h2>
+          <h3>Sign up for Chef position</h3>
+
                
                 <div >
                 <Icon style={{ fontSize: '20px', color: 'blue' }} className="icons" type="facebook" />
                 <Icon style={{ fontSize: '20px'}} className="icons" type="google" />
                 </div>
-                <input className="signup-input" onChange={this.eventHandler} name="username" type="text" placeholder="username" />
-                <input className="signup-input" onChange={this.eventHandler} name="email" type="text" placeholder="email" />
-                <input className="signup-input" onChange={this.eventHandler} name="password" type="password" placeholder="password" />
-                <input className="signup-input" onChange={this.eventHandler} name="password2" type="password" placeholder="re-type password" />
+                <input className="signup-input" onChange={this.eventHandler} name="username" type="text" placeholder="Chef name" />
+                <input className="signup-input" onChange={this.eventHandler} name="email" type="text" placeholder="Email" />
+                <input className="signup-input" onChange={this.eventHandler} name="password" type="password" placeholder="Password" />
+                <input className="signup-input" onChange={this.eventHandler} name="password2" type="password" placeholder="Re-type password" />
                
                 <p style={{ color: "red" }}>{errors.password}</p>
                 </div>
             <div className="hello-card"> 
                 <p>Welcome to our team Chef!</p>
-                <button onClick={this.sendToServer}>Registrarse</button>
+          
+                <button onClick={this.sendToServer}><i height="40"class="fas fa-pizza-slice"></i>Registrarse </button>
             </div>
             </div>
 

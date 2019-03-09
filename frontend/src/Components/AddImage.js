@@ -21,7 +21,7 @@ class  AddImage extends React.Component{
                 this.setState({ privateInfo })
 
             })
-            .catch((e)=>alert(e))
+            .catch((e)=>console.log(e))
     }
 
 
@@ -39,12 +39,16 @@ class  AddImage extends React.Component{
         }
         render(){
             let {profilePic} = this.state
-            console.log(profilePic)
+            
 
             return(
-                <div>
+                <div className="image-page">
+                <div className="image-container">
+                <h1>Add Image</h1>
+
                     <input type="file" onChange={this.handleChange}/>    
                     <button onClick={this.handleSubmit}>Add image</button>          
+                </div>
                 </div>
             )
         
