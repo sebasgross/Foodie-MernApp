@@ -35,9 +35,10 @@ class Home extends React.Component{
                     <div key={product._id} className="home-available" >
                <Link to={`detail/${product._id}`}>
                <div className="home-plate">    
-                    <h2>Plate</h2>                
-                    <h3>Chef: <b>{product.seller.username}</b></h3>
+                                    
+                    <h2>Chef: <b>{product.seller.username}</b></h2>
                     <img height="80"src={product.picture} alt=""/>
+                    <p><b>{product.name}</b></p>
                     <p># <b>{product.type}</b></p>
                     <p>Exquisite <b>{product.cuisine}</b> cuisine</p>
                     <p>Are you interested? Click me for details</p>

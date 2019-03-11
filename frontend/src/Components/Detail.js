@@ -26,14 +26,21 @@ class Detail extends React.Component{
         // // let { id } = this.state
         // const url= `http://localhost:3000/detail/` + id
         let { id } = this.props.match.params
-        const {user} =this.state
+        const {userloggued} =this.state
         const url= `http://localhost:3000/detail/${id}`
-        axios.post(url, user, {withCredentials: true})
-        .then(()=>{
-            console.log('jola')
-            this.props.history.push('/profile')
-        })
-        .catch((e)=>console.log(e))
+        if(userloggued.coordinates.length > 0){
+            axios.post(url, userloggued, {withCredentials: true})
+            .then(()=>{
+                console.log('jola')
+                this.props.history.push('/profile')
+            })
+            .catch((e)=>{
+            console.log(e)
+            })
+        }else{
+            this.props.history.push('/map/direction')
+        }
+        
     }
 
     render(){

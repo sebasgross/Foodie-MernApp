@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import Routes from "./Routes";
 import axios from "axios";
@@ -113,6 +113,13 @@ class App extends Component {
     {this.navDraw()}
     
     <Routes isLogged={isLogged} logOut={this.logOut} logIn={this.logIn} map={this.mapContainer} user={user} />
+   
+      <div className="footer">
+        <h4>Created by:</h4>
+        <p>Sebasgross</p>
+        <Link to="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></Link>
+      </div>
+
     </div>;
   }
 }

@@ -38,6 +38,9 @@ code {
 
   padding: 10px;
 }
+.profile-page{
+  margin: 0 25px 40px 25px;
+}
 .product-card {
   height: 450px;
   width: 450px;
@@ -45,6 +48,7 @@ code {
   font-family: "Overpass", sans-serif;
   padding: 5px;
 }
+
 .profile-container {
   font-family: "Overpass", sans-serif;
   display: flex;
@@ -54,7 +58,7 @@ code {
   padding: 10px;
 }
 .profile-card {
-  height: 250px;
+  height:280px;
   width: 250px;
   border: 1px solid black;
   padding: 5px;
@@ -154,6 +158,9 @@ code {
   color: black;
   font-family: "Overpass", sans-serif;
 }
+.home-plate:hover{
+  opacity: .4;
+}
 .home > h1 {
   font-family: "Passion One", cursive;
   font-size: 300%;
@@ -221,9 +228,34 @@ code {
 .section3-container{
   font-family: "Overpass", sans-serif;
 
-  margin: 20px 0 20px 0;;
+  margin: 20px 0 20px 0;
 }
 .become-chef:hover{
   opacity: 0.2;
 }
+.app{
+  margin: 0 25px 0 25px;
+}
+.footer{
+  font-family: "Overpass", sans-serif;
+  margin: 5px 0 5px 0;
+  height: 28vh;
+  width: 100%;
+  background-color: gray;
+  display: flex;
+  justify-content: center;
+  /* align-content: center; */
+  flex-direction: column;
+  
+  /* bottom: 1px; */
+}
+
+@media (max-width: 600px) {
+  .footer{
+    display: none;
+  }
+}
+/* .footer >h{
+text-align: center;
+} */
 

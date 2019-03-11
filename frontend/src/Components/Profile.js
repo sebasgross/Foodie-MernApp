@@ -50,35 +50,40 @@ class Profile extends Component {
     const { user, product,productsChef,productsFiltered } = this.state;
 
     if (!user) return <div><img src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>;
-  
+    if(user.chef && user.coordinates.length === 0){
+      return(
+        <Link to="/map/direction">Add your address, if you want to post your food</Link>
+      )
+    }
     if(user.chef){
       return(
-        <div>
+        <div className="profile-page">
           
-          <div>
+          <div >
             <h2><b>Chef Profile</b></h2>
           </div>
-          <Link to="/map/direction">AQUI para mapa</Link>
           <h1>{user.username}</h1>
           <h4>{user.email}</h4>
           <div>
             <Link to="/new/product"> Post your Product </Link>
           </div>
           <hr></hr>
+          <h2>Your recipes</h2>
           <div  className="profile-container">
           {productsChef.map(product => {
             return(
+              
               <div key={product._id} className="profile-card">
                 <h2>{product.name}</h2>
                 <img height="100"src={product.picture} alt="" />
-                <p>{product.quantity}</p>
+                <p>{product.quantity} plates left</p>
               </div>
             )}
             )}
             </div>
 
             <hr></hr>
-            <button onClick={this.filterProducts}>Filter</button>
+            <button onClick={this.filterProducts}>Current Orders</button>
 
               <div className="profile-container">
             {productsFiltered.map(product=>{
@@ -87,7 +92,7 @@ class Profile extends Component {
                 
                 <h2>{product.name}</h2>
                 <img height="100"src={product.picture} alt="" />
-                <p>{product.quantity}</p>
+                <p>{product.quantity} plates left.</p>
                 <button>Arrived at clients house.</button>
                 
                 </div>
@@ -97,9 +102,12 @@ class Profile extends Component {
         </div>
       )
     }
+    //ELSE
     return (
       <div className="user-container">
+
         <h1>Profile</h1>
+        <div>
         <p>
           Username:
           {user.username}
@@ -107,8 +115,8 @@ class Profile extends Component {
           Email:
           {user.email}
         </p>
-
-        <p>{user.product}</p>
+        </div>
+       
 
         <div  className="profile-container">
           {product.map(product => {
@@ -118,7 +126,7 @@ class Profile extends Component {
 
                 <h2>{product.name}</h2>
                 <img height="100"src={product.picture} alt="" />
-                <p>{product.quantity}</p>
+                <p>{product.seller}</p>
               </div>
             )}
             )}

@@ -28,11 +28,11 @@ const productSchema = new Schema({
     type: Boolean,
     default: false
   },
-  lng: Number,
-  lat: Number,
+  addressBuyer: String,
+  addressChef: String,
   picture:{
     type: String,
-    default: "http://res.cloudinary.com/dpt8pbi8n/image/upload/v1550853621/user.png"
+    default: "http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552158678/kisspng-kitchen-utensil-computer-icons-plate-fork-clip-art-food-icon-5ac4b8e51272c9.1142590615228418290756.jpg"
   }
 },{ timestamps: true })
 

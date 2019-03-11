@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import { Input, InputNumber } from 'antd';
+import { Input } from 'antd';
 
 //imagwen
 const url = "http://localhost:3000/new/product"
@@ -24,6 +24,7 @@ class Productform extends React.Component{
 
     sendToServer = () => {
         let { product } = this.state
+        
         axios.post(url, product, { withCredentials:true })
             .then(res => {
                 // console.log(res.data)

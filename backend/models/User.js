@@ -14,6 +14,7 @@ let userSchema = new Schema({
     ref: "Product"
   }],
   address: String,
+  coordinates:[Number],
   profilePic:{
     type: String,
     default: "http://res.cloudinary.com/dpt8pbi8n/image/upload/v1550853621/user.png"

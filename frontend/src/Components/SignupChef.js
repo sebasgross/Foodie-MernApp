@@ -24,7 +24,6 @@ class SignupChef extends Component{
         let url = "http://localhost:3000/chef/signup"
         axios.post(url,newUser)
         .then(user=>{
-           
             this.props.history.push('/login')
         })
         .catch(e=>console.log(e))

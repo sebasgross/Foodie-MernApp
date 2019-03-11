@@ -10,16 +10,20 @@ mapboxgl.accessToken = "pk.eyJ1Ijoic2ViYXNncm9zcyIsImEiOiJjanMxeGpzdzUwaGo1NDNvO
 
 class MapBox extends Component {
   
+
     state = {
       lng: -85.14556,
       lat: 22.41944,
       zoom: 3,
-    newUser:{}
-      
+    coordinates:[],
+    address:{}
 
+      
     }
   
     componentDidMount() {
+
+      this._isMounted = true
       const { lng, lat, zoom } = this.state
       const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
@@ -32,26 +36,35 @@ class MapBox extends Component {
         zoom: zoom
       })
 
-    // geocoder.on('result', (e) => {
-    // //   const {resLng,resLat} = this.state
-
-    //     this.setState({resLng:e.result.center[0],resLat:e.result.center[1]})
-    //     console.log(resLng)
 
 
-    // })
+
+
+    // addResult=(res)=>{
+    //   // const { newCords } = this.state
+
+    //   this.setState({newCords:[res.result.center[0],res.result.center[1]]})
+    // }
 
     geocoder.on('result',(res) =>{
-    document.getElementById('lng').value = res.result.center[0]
-    document.getElementById('lat').value = res.result.center[1]
+      // const { newCords} = this.state
+    let coordinates = []
+    let address = {}
+      coordinates = res.result.center
+      address = res.result.place_name
+     
+    this.setState({address,coordinates})
+
+    
 })
       new mapboxgl.Marker()
-        .setLngLat([-85.14556,22.41944])
+      // const { center } = this.state
+        .setLngLat([lng , lat])
             .addTo(map);
   
 
       map.on('move', () => {
-        //   console.log(map)
+        
         const { lng, lat } = map.getCenter()
   
         this.setState({
@@ -62,18 +75,22 @@ class MapBox extends Component {
       })
       
     map.addControl(geocoder)
+    console.log(this.state)
 
     }
 
-    eventHandler=(e)=>{
-        let {newUser} = this.state
-        newUser[e.target.name] = e.target.value
-        this.setState({newUser})
-    }
+
+    // eventHandler=(e)=>{
+    //     let {newUser} = this.state
+    //     newUser[e.target.name] = e.target.value
+    //     this.setState({newUser})
+    // }
    sendToServer=()=>{
-        let {newUser} = this.state
+     
+        let {address, coordinates} = this.state
+        console.log(address)
         let url = "http://localhost:3000/address/user"
-        axios.post(url,newUser,{withCredentials:true})
+        axios.post(url,{address, coordinates},{withCredentials:true})
         .then(user=>{
             console.log(user)
             this.props.history.push('/profile')
@@ -87,17 +104,11 @@ class MapBox extends Component {
     buscar REF en React paraa arreglar probelam
     */ 
     render() {
-      const {newUser} = this.state
-      console.log(newUser)
-        // if(!resCenter) return <div>...loading</div>
       return (
-   
 
           <div>
         <div style={{ width: '800px', height: '400px' }} ref={e => (this.mapContainer = e)}/>
 
-        <input onChange={this.eventHandler} type="text" name="lng" hidden={false} id="lng"  />
-        <input onChange={this.eventHandler} type="text" name="lat" hidden={false} id="lat" />
         <button onClick={this.sendToServer}>Clcikkk</button>
         </div>
       )

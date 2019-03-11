@@ -19,7 +19,7 @@ export default ({ isLogged, logIn , logOut, user})=>(<Switch>
     <Route path="/signup" component={Signup}/>
     <Route path="/chef/signup" component={SignupChef}/>
     <Route path="/login" render={(props=>isLogged?<Redirect to={'/'}/>:<Login {...props} logIn={logIn}/>)} />
-    <Route path="/logout" render={(props=>isLogged? <Logout {...props} logOut={logOut} user={user}/>: <Redirect to={'/'}/>)} />
+    <Route path="/logout" render={(props=>isLogged? <Logout {...props} logOut={logOut} user={user}/>:<Redirect to={'/'}/>)} />
     <Route path="/home" component={Home}/>
     <Route path="/profile" component={Profile} />
     <Route path="/new/product" component={ProductForm} />

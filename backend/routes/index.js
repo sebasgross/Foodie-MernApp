@@ -58,12 +58,23 @@ router.post("/chef/signup", (req, res, next) => {
     .catch(e => next(e));
 });
 //Editar addreess para user
+router.get('/address/user'), isAuth,(req,res,next)=>{
+  User.findById(req.user._id)
+  .then((user)=>{
+    res.status(200).json(user)
+  })
+  .catch((e)=>next(e))
+}
 router.post('/address/user',isAuth,(req,res,next)=>{
-  
-  User.findByIdAndUpdate(req.user._id, { $set: { ...req.body } }, { new: true })
-  // console.log(req.body)
-  .then((res)=>{
-    res.status(200).json(res)
+  console.log(req.body)
+
+
+  User.findByIdAndUpdate(req.user._id, req.body, { new: true })
+  // console.log(req.body.user)
+
+  .then((user)=>{
+    // console.log(user)
+    res.status(200).json(user)
   })
   .catch((e)=>console.log(e))
 })
@@ -96,6 +107,7 @@ router.get('/profile', isAuth,(req,res,next)=>{
   // console.log(req.user._id)
   User.findById(req.user._id)
   .populate('products')
+  
   // Product.find({seller:req.user._id})
   .then((user)=>{
     console.log(user.products)
@@ -106,6 +118,7 @@ router.get('/profile', isAuth,(req,res,next)=>{
 //profile products
 router.get('/profile/products',isAuth,(req,res,next)=>{
     Product.find({seller:req.user._id})
+    
     .then((product)=>{
       res.status(200).json({product})
     })
