@@ -66,7 +66,7 @@ router.get('/address/user'), isAuth,(req,res,next)=>{
   .catch((e)=>next(e))
 }
 router.post('/address/user',isAuth,(req,res,next)=>{
-  console.log(req.body)
+ 
 
 
   User.findByIdAndUpdate(req.user._id, req.body, { new: true })
@@ -110,14 +110,14 @@ router.get('/profile', isAuth,(req,res,next)=>{
   
   // Product.find({seller:req.user._id})
   .then((user)=>{
-    console.log(user.products)
+  
     res.status(200).json(user)
   })
   .catch(e=>next(e))
 })
 //profile products
 router.get('/profile/products',isAuth,(req,res,next)=>{
-    Product.find({seller:req.user._id})
+    Product.find({seller:req.user._id, delivered:false})
     
     .then((product)=>{
       res.status(200).json({product})
@@ -134,13 +134,37 @@ router.get('/image',isAuth,(req,res,next)=>{
   .catch((e)=>next(e))
 })
 
+//filtro product
+router.get('/home/filter',isAuth,(req,res,next)=>{
+  const {search} = req.query 
+  Product.find({
+    
+    $or:[
+      {name: {$regex:search,$options:'i'}},
+      {type:  {$regex:search,$options:'i'}},
+      {cuisine:  {$regex:search,$options:'i'}},
+      {ingredients:  {$regex:search,$options:'i'}},
+    ],quantity: {$gt: 0},bought:false
+
+  })
+  .populate("seller")
+  .then((result)=>{
+    // console.log(res)
+    res.status(200).json(result)
+  })
+  .catch((e)=>{
+    console.log(e)
+    res.json(e)
+  })
+})
+
 //private home
 router.get("/home", isAuth, isLoggedIn, (req, res, next) => {
-  Product.find({quantity: {$gt: 0}})
+  Product.find({quantity: {$gt: 0},bought:false})
   .populate("seller")
 
   .then((product)=>{
-    console.log(product)
+    
     res.status(200).json({product});
   })
   .catch((err)=>next(err))
@@ -151,6 +175,7 @@ router.get('/detail/:id', isAuth ,(req,res,next)=>{
   const {id} = req.params
   
   Product.findById(id)
+  .populate("buyer")
   .then((p)=>{
     res.status(200).json({p, user: req.user})
   })
@@ -159,24 +184,71 @@ router.get('/detail/:id', isAuth ,(req,res,next)=>{
 
 router.post('/detail/:id',isAuth ,(req,res,next)=>{
   const {id} = req.params
-  // console.log(id)
   
-  Product.findByIdAndUpdate(id,{$inc: {quantity: -1 }, active: true, buyer:req.user._id}, {new: true})
+  
+  
+  Product.findByIdAndUpdate(id,{$inc: {quantity: -1 }}, {new: true})
   .populate('seller')
-
   .then((p) => {
-   // console.log(p.seller._id)
-      User.findByIdAndUpdate(req.user._id, { $push: { products: p._id } }, {new: true})
+  //  console.log("Hola, este es: ", p)
+   let nuevo = {
+  name: p.name,
+  seller: p.seller,
+  type: p.type[0],
+  cuisine:p.cuisine[0],
+  ingredients: p.ingredients,
+  posted: p.posted,
+  price: p.price,
+  quantity:p.quantity -1,
+  active:true,
+  coordinatesTo:req.user.coordinates,
+  addressTo: req.user.address,
+  coordinatesFrom:p.coordinatesFrom,
+  addressFrom: p.addressFrom,
+  picture:p.picture,
+  buyer: req.user._id,
+  bought: true
+   }
+   Product.create(nuevo)
+    .then(newProduct => {
+      User.findByIdAndUpdate(req.user._id, { $push: { products: newProduct._id } }, {new: true})
       .then((x)=>{
-      
       res.status(200).json(x)
-      User.findByIdAndUpdate(p.seller, { $push: { products: p._id } }, {new: true})
+      User.findByIdAndUpdate(p.seller._id, { $push: { products: newProduct._id } }, {new: true})
       .then((p)=>{
-        res.tatus(200).json(p)
+        res.status(200).json(p)
       })
 })
 .catch(e=>console.log(e))
+    })
+      
 })
+})
+
+//arrived
+router.post('/directions/:id',isAuth ,(req,res,next)=>{
+  const {id} = req.params
+  
+  Product.findByIdAndUpdate(id,{delivered: true}, {new: true})
+  .populate('seller')
+  .then((p) => {
+  console.log(p)
+   res.status(200).json(p)
+  })
+  .catch(e=>console.log(e))
+})
+  
+//in route
+router.post('/inroute/:id',isAuth ,(req,res,next)=>{
+  const {id} = req.params
+  
+  Product.findByIdAndUpdate(id,{track: true}, {new: true})
+  .populate('seller')
+  .then((p) => {
+  console.log(p)
+   res.status(200).json(p)
+  })
+  .catch(e=>console.log(e))
 })
 
 router.post('/imageProfile',isAuth, uploadCloud.single('picture'), (req, res, next) => {
@@ -191,6 +263,31 @@ router.get("/private", isAuth, (req, res, next) => {
     .status(200)
     .json({ message: "Access granted: Clearance 1", user: req.user });
 });
+
+//edit product
+router.post('/edit/:id', isAuth ,uploadCloud.single('photoURL'),(req,res,next)=>{
+  const {id} = req.params
+
+
+  Product.findByIdAndUpdate(id,{...req.body},{new:true})
+  .then((p)=>{
+    res.status(200)
+  })
+  .catch((e)=>next(e))
+})
+//delte
+router.post('/delete/:id', isAuth ,uploadCloud.single('photoURL'),(req,res,next)=>{
+  const {id} = req.params
+
+
+
+  Product.findByIdAndRemove({_id:id})
+  .then((p)=>{
+    res.status(200)
+  })
+  .catch((e)=>next(e))
+})
+//index
 router.get('/', (req, res, next) => {
   res.render('index');
 });

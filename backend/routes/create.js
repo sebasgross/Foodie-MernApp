@@ -30,6 +30,7 @@ function isLoggedIn(req, res, next) {
 // sculpture
 router.post('/product',isAuth,(req,res,next)=>{
   req.body.seller = req.user._id
+  req.body.coordinatesFrom = req.user.coordinates
   Product.create(req.body)
   .then(product => {
     test = product._id

@@ -35,8 +35,9 @@ class App extends Component {
         <div className="app-container">
           <nav className="navbar-1">
             <NavLink to="/login">Log in</NavLink>
+            <Link to="/">
           <img height="68"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551978138/logo.png" alt="logo"/>
-        
+          </Link>
             <NavLink to="/signup">Sign up</NavLink>
           </nav>
 
@@ -47,7 +48,9 @@ class App extends Component {
       return (
         <div className="app-container">
           <nav className="navbar-2">
+          <Link to="/">
           <img height="68" src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551978138/logo.png" alt="logo"/>            
+           </Link>
             <NavLink to="/home">Home</NavLink>
             {"|"}
             <NavLink to="/profile">Profile</NavLink>
@@ -117,7 +120,7 @@ class App extends Component {
       <div className="footer">
         <h4>Created by:</h4>
         <p>Sebasgross</p>
-        <Link to="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></Link>
+        <a href="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></a>
       </div>
 
     </div>;

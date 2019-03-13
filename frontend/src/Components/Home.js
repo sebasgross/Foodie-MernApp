@@ -1,33 +1,58 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
-
+// import FilterableProduct from './FilterableProduct'
+import { nextTick } from 'q';
+import SearchBar from './SearchBar'
 
 
 class Home extends React.Component{
     state={
-        products:[],
+        products:null,
+        loader:true,
+
+        // productsBackup:[],
         user:{}
     }
 
-    componentDidMount(){
+    componentWillMount(){
         let url = "http://localhost:3000/home"
         axios.get(url,{withCredentials:true})
         .then((res)=>{
             
-            this.setState({products:res.data.product})
+            this.setState({products:res.data.product, loader:false})
 
         })
         .catch((err)=>console.log(err))
+    
     }
+
+    getFilter = e => { 
+        
+        let url2 = "http://localhost:3000/home/filter?search=" + e.target.value
+        axios.get(url2,{withCredentials:true})
+        .then((res)=>{
+            console.log(res)
+            this.setState({products:res.data})
+        })
+        .catch((err)=>console.log(err))
+    }
+
+    
+
     render(){
-        const {products,user} = this.state
-        console.log(products)
-        if(products.length === 0 || !user) return <div><img height="200"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>
+        const {products,user,productsFiltered, loader} = this.state
+        console.log(productsFiltered)
+        if(!products || !user || loader) return <div className="home"><img className="icon-pizza" height="200"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>
         return(
             <div className="home">
+            <div className="home-menu">
             <h1>Today's Menu</h1>
+
+            <div className="search-bar">
+                <SearchBar products={productsFiltered} getFilter={this.getFilter} />
+            </div>
+            </div>
                 <div className="home-container"> 
                       {products.map((product)=>{
                 return(
@@ -48,6 +73,8 @@ class Home extends React.Component{
 
                 )
             })}
+
+
             </div>
             </div>
         )

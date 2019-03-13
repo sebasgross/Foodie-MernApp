@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mapbox/mapbox-gl-directions": "^4.0.0",
     "@mapbox/mapbox-gl-geocoder": "^3.1.4",
     "@mapbox/react-geocoder": "^2.5.0",
     "antd": "^3.14.1",
@@ -12,6 +13,7 @@
     "react-dom": "^16.8.3",
     "react-map-gl": "^4.0.14",
     "react-mapbox-gl-geocoder": "^1.0.3",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "toastr": "^2.1.4"

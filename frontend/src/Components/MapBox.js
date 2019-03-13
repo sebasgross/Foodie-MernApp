@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder'
 import mapboxgl from 'mapbox-gl' //npm i mapbox-gl o yarn add mapbox-gl
+import * as toastr from 'toastr';
 
 import '../App.css'
 
@@ -54,13 +55,15 @@ class MapBox extends Component {
       address = res.result.place_name
      
     this.setState({address,coordinates})
+    new mapboxgl.Marker()
+    .setLngLat(coordinates)
+    .addTo(map);
+    console.log(coordinates)
+    console.log(this.state.coordinates)
 
     
 })
-      new mapboxgl.Marker()
-      // const { center } = this.state
-        .setLngLat([lng , lat])
-            .addTo(map);
+
   
 
       map.on('move', () => {
@@ -73,9 +76,11 @@ class MapBox extends Component {
           zoom: map.getZoom().toFixed(2)
         })
       })
+
+
       
     map.addControl(geocoder)
-    console.log(this.state)
+    // console.log(this.state)
 
     }
 
@@ -93,6 +98,7 @@ class MapBox extends Component {
         axios.post(url,{address, coordinates},{withCredentials:true})
         .then(user=>{
             console.log(user)
+            toastr.info("Sorry, your order didnt get processed")
             this.props.history.push('/profile')
         })
         .catch(e=>console.log(e))
@@ -106,10 +112,10 @@ class MapBox extends Component {
     render() {
       return (
 
-          <div>
+          <div className="mapbox-container">
         <div style={{ width: '800px', height: '400px' }} ref={e => (this.mapContainer = e)}/>
 
-        <button onClick={this.sendToServer}>Clcikkk</button>
+        <button onClick={this.sendToServer}>Add Address</button>
         </div>
       )
     }

@@ -1,16 +1,30 @@
 import React from 'react'
+
 import axios from 'axios'
 import { Input } from 'antd';
 
-//imagwen
-const url = "http://localhost:3000/new/product"
 const { TextArea } = Input
-class Productform extends React.Component{
+
+// const {id} = this.state.product
+class Edit extends React.Component{
     state={
         product:{},
-        errors:{}
+        userloggued: {}
     }
 
+    componentDidMount(){
+        let { id } = this.props.match.params
+        const url= `http://localhost:3000/detail/${id}`
+
+        axios.get(url, {withCredentials:true})
+        .then((product)=>{
+            console.log(product)
+            this.setState({product:product.data.p,id:product.data.p._id, userloggued: product.data.user })
+            console.log(product.data._id)
+
+        })
+        .catch(err=>console.log(err))
+    }
     handleChange = e => {
         let { product } = this.state
         product[e.target.name]=e.target.value
@@ -22,17 +36,37 @@ class Productform extends React.Component{
         // this.setState({ newUser, errors })
     }
 
-    sendToServer = () => {
-        let { product } = this.state
+      borrarProduct = () =>{
+        let { id } = this.props.match.params    
+        const url4 = `http://localhost:3000/delete/${id}` 
+          
+    axios.delete(url4,{withCredentials:true})
+    .then(res=>{
+      console.log("deleted")
+    })
+    .catch((e)=>console.log(e))
+  }
+     sendToServer = ()=>{
+        // // let { id } = this.state
+        // const url= `http://localhost:3000/detail/` + id
+        let { id } = this.props.match.params
+        const {product} =this.state
+        const url= `http://localhost:3000/edit/${id}`
         
-        axios.post(url, product, { withCredentials:true })
-            .then(res => {
-                // console.log(res.data)
-                this.props.history.push('/new/imageProfile')
+            axios.post(url, product, {withCredentials: true})
+            .then(()=>{
+                console.log('jola')
+                this.props.history.push('/profile')
             })
-            .catch(e => console.log(e))
+            .catch((e)=>{
+            console.log(e)
+            })  
+    }
+    goBack = () =>{
+        this.props.history.push('/profile')
     }
     render(){
+        const { product } = this.state
         return(
             <div>
             <div className="product-form-container">
@@ -40,8 +74,8 @@ class Productform extends React.Component{
                 
                 {/* <input onChange={this.handleChange} placeholder="Name" name="name" type="text" /> */}
                 <div className="example-input">
-                <h2>Post your recipe</h2>
-                <Input onChange={this.handleChange} style={{width:'50%'}} size="default" name="name" placeholder="Recipe Name" />
+                <h2>Edit your recipe</h2>
+                <Input onChange={this.handleChange} style={{width:'50%'}} size="default" name="name" placeholder={product.name} />
                 
                 <select onChange ={this.handleChange} defaultValue="Breakfast" name="type" style={{width:"50%"}}>
                 {/* <Select onChange={this.handleChange} mode="multiple" style={{width:'50%'}} name="type" placeholder="Select Type" > */}
@@ -69,16 +103,19 @@ class Productform extends React.Component{
                     <option value="Sushi">Sushi</option>
                 </select>
                 <TextArea name="ingredients" placeholder="Remember some people are allergic to certain foods, try to write down all your ingredients." onChange={this.handleChange} rows={4} />
-                <input className="input-number" onChange={this.handleChange} placeholder="How many plates did you make?" type="number" default={1} name="quantity" min={1} max={10}   />
+                <input className="input-number" onChange={this.handleChange} placeholder="Change the # of plates." type="number" default={1} name="quantity" min={1} max={10}   />
                 <input className="input-number" onChange={this.handleChange} placeholder="$ Price" name="price" type="number" min="0.00" max="10000.00" step="1" />
                 </div>
                 
                 {/* <input onChange={this.handleChange} placeholder="quantity" name="quantity" type="number" maxLength="10" /> */}
 
             </div>
-            <button className="button-order" onClick={this.sendToServer}>Add Product</button>
+            <button onClick={this.sendToServer}>Edit Product</button>
+            {/* <button onClick={this.borrarProduct}>Delete Product</button> */}
+             <button onClick={this.goBack}> Go back</button>
+            
             </div>
         )
-    }   
+    }
 }
-export default Productform
+export default Edit
