@@ -21,7 +21,7 @@ class SignupChef extends Component{
     sendToServer=()=>{
         let {newUser} = this.state
         newUser.chef = true
-        let url = "http://localhost:3000/chef/signup"
+        let url = "https://foodie-el-app.herokuapp.com/chef/signup"
         axios.post(url,newUser)
         .then(user=>{
             this.props.history.push('/login')

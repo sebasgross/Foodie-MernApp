@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 // import FilterableProduct from './FilterableProduct'
-import { nextTick } from 'q';
+
 import SearchBar from './SearchBar'
 
 
@@ -16,7 +16,7 @@ class Home extends React.Component{
     }
 
     componentWillMount(){
-        let url = "http://localhost:3000/home"
+        let url = "https://foodie-el-app.herokuapp.com/home"
         axios.get(url,{withCredentials:true})
         .then((res)=>{
             
@@ -29,7 +29,7 @@ class Home extends React.Component{
 
     getFilter = e => { 
         
-        let url2 = "http://localhost:3000/home/filter?search=" + e.target.value
+        let url2 = "https://foodie-el-app.herokuapp.com/home/filter?search=" + e.target.value
         axios.get(url2,{withCredentials:true})
         .then((res)=>{
             console.log(res)

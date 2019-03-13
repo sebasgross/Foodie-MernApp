@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import * as toastr from 'toastr';
-const url = "http://localhost:3000/new/imageProfile" 
+const url = "https://foodie-el-app.herokuapp.com/new/imageProfile" 
 const serviceUpload  = axios.create({url, withCredentials: true})
 
 
@@ -38,8 +38,6 @@ class  AddImage extends React.Component{
           .catch( e => console.log(e))
         }
         render(){
-            let {profilePic} = this.state
-            
 
             return(
                 <div className="image-page">

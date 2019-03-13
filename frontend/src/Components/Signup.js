@@ -19,7 +19,7 @@ class Signup extends Component{
     }
     sendToServer=()=>{
         let {newUser} = this.state
-        let url = "http://localhost:3000/signup"
+        let url = "https://foodie-el-app.herokuapp.com/signup"
         axios.post(url,newUser)
         .then(user=>{
             // console.log(user)

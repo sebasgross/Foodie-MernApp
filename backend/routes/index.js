@@ -5,6 +5,7 @@ const Product = require('../models/Product')
 const passport = require("passport");
 //cloudinary
 const multer = require("multer");
+const path = require('path');
 const uploadCloud = require("../helpers/cloudinary");
 
 
@@ -38,6 +39,10 @@ function isLoggedIn(req, res, next) {
       res.redirect('/login');
   }
 }
+
+router.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+});
 
 //signup
 router.post("/signup", (req, res, next) => {
@@ -80,19 +85,14 @@ router.post('/address/user',isAuth,(req,res,next)=>{
 })
 
 //logout
-router.get("/logout", isAuth, (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.logout();
-
-  req.session.destroy(err => {
-    if (!err) {
-      res
-        .status(200)
-        .clearCookie("connect.sid", { path: "/" })
-        .json({ message: "Logout successful" });
+  req.session.destroy((err) => {
+    if(!err) {
+      res.status(200).clearCookie('connect.sid', {path: '/'}).json({message: "Estas loggedOUTT!!"})
     }
-    if(!req.user) res.redirect('/login')
+  })
 
-  });
 });
 
 //login
@@ -288,8 +288,7 @@ router.post('/delete/:id', isAuth ,uploadCloud.single('photoURL'),(req,res,next)
   .catch((e)=>next(e))
 })
 //index
-router.get('/', (req, res, next) => {
-  res.render('index');
-});
+
+
 
 module.exports = router;

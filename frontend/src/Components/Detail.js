@@ -11,7 +11,7 @@ class Detail extends React.Component{
 
     componentDidMount(){
         let { id } = this.props.match.params
-        const url= `http://localhost:3000/detail/${id}`
+        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
         
         axios.get(url, {withCredentials:true})
         .then((product)=>{
@@ -24,10 +24,10 @@ class Detail extends React.Component{
     }
      addRequest = ()=>{
         // // let { id } = this.state
-        // const url= `http://localhost:3000/detail/` + id
+        // const url= `https://foodie-el-app.herokuapp.com/detail/` + id
         let { id } = this.props.match.params
         const {userloggued} =this.state
-        const url= `http://localhost:3000/detail/${id}`
+        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
         if(userloggued.coordinates.length > 0){
             axios.post(url, userloggued, {withCredentials: true})
             .then(()=>{
@@ -56,7 +56,7 @@ class Detail extends React.Component{
                 <div className="detail-type">
                 <p>This is <b>{product.cuisine}</b> cuisine  </p> 
                 {"|"}
-                <p>Type of Food: {product.type}</p>
+                <p>Type of Food: <b>{product.type}</b></p>
                 </div>
                 <div>
                     <p>Following ingredinets were used: {product.ingredients}<br></br>(Be aware of allergies, or eating raw foods.)</p>
@@ -69,10 +69,13 @@ class Detail extends React.Component{
                     </div>
 
                 </div>         
+
             </div>
 
                 
             </div>
+          
+
             </div>
         )
     }

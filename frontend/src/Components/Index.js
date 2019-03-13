@@ -48,6 +48,11 @@ export default function(){
             </div>
             </Link>
         </div>
+        <div className="footer">
+        <h4>Created by:</h4>
+        <p>Sebasgross</p>
+        <a href="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></a>
+      </div>
         </div>
     )
 }

@@ -94,11 +94,11 @@ class MapBox extends Component {
      
         let {address, coordinates} = this.state
         console.log(address)
-        let url = "http://localhost:3000/address/user"
+        let url = "https://foodie-el-app.herokuapp.com/address/user"
         axios.post(url,{address, coordinates},{withCredentials:true})
         .then(user=>{
             console.log(user)
-            toastr.info("Sorry, your order didnt get processed")
+            toastr.info("Address added")
             this.props.history.push('/profile')
         })
         .catch(e=>console.log(e))

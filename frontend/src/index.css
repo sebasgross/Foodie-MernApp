@@ -19,12 +19,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.app{
+  background-color: black;
+}
 .home-button {
   height: 50px;
 }
 .home-container {
   display: flex;
   flex-direction: row;
+  height: 100vh;
   flex-wrap: wrap;
   padding: 10px;
 }
@@ -112,6 +116,8 @@ opacity: 0;
   width: 250px;
   border: 1px solid black;
   padding: 5px;
+  margin: 0 2px 5px 0;
+
 }
 .user-container{
   font-family: "Overpass", sans-serif;
@@ -214,7 +220,7 @@ opacity: 0;
   position: absolute;
   /* align-self: center; */
   top: 230px;
-  left: 495px;
+  left: 580px;
   
 }
 .home{
@@ -375,6 +381,7 @@ opacity: 0;
   width: 100%;
   background-color: gray;
   display: flex;
+
   justify-content: center;
   /* align-content: center; */
   flex-direction: column;
@@ -441,4 +448,7 @@ height: 70vh;
 .add-address{
   height: 70vh;
   font-size: 300%;
+}
+.user-pagina{
+  height: 90vh;
 }

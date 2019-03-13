@@ -19,7 +19,7 @@ class Login extends Component{
 
 //     // function sendToServer(){
 //     //     // console.log(auth)
-//     //     let url = 'http://localhost:3000/login'
+//     //     let url = 'https://foodie-el-app.herokuapp.com/login'
 //     //     //por degfault axios ignora cokkies, hay q configurarlo para q pase cookies ({withCredentials})
 //     //     axios.post(url,auth, { withCredentials:true })
 //     //     .then(res=>{

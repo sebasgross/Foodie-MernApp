@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 
 
 const profile = "profile"
-const url2 = "http://localhost:3000/" + profile
+const url2 = "https://foodie-el-app.herokuapp.com/" + profile
 const chefprofile = "profile/products"
-const url3 = "http://localhost:3000/" + chefprofile
+const url3 = "https://foodie-el-app.herokuapp.com/" + chefprofile
 // const borrar = "delete/product" 
 
 
@@ -84,9 +84,9 @@ class Profile extends Component {
           <hr></hr>
           <h2>Your Recipes</h2>
           <div  className="profile-container">
-          {productsRecipes.map(product => {
+          {productsRecipes.map((product,i) => {
             return(
-              <Link to={`edit/${product._id}`}>
+              <Link key={i}to={`edit/${product._id}`}>
               <div key={product._id} className="profile-card">
                 <h2>{product.name}</h2>
                 <img height="100"src={product.picture} alt="" />
@@ -105,7 +105,7 @@ class Profile extends Component {
             <button onClick={this.filterProducts}>Current Orders</button>
 
               <div className="profile-container">
-            {productsFiltered.map(product=>{
+            {productsFiltered.map((product,i)=>{
               return(
                 <div key={product._id} className="profile-card2">
                 
@@ -113,7 +113,7 @@ class Profile extends Component {
                 <img height="100"src={product.picture} alt="" />
                 <p>{product.quantity}# order</p>
                 <p>Address: {product.addressTo}</p>
-                <Link to={`directions/${product._id}`}><button>Start trip</button></Link>
+                <Link key={i}to={`directions/${product._id}`}><button>Start trip</button></Link>
               
 
                 </div>
@@ -128,7 +128,7 @@ class Profile extends Component {
   if(!user.chef){
     return (
       <div className="user-container">
-
+      <div className="user-pagina">
         <h1>Profile</h1>
         <div>
         <p>
@@ -147,9 +147,9 @@ class Profile extends Component {
 
         <div  className="profile-container">
     
-          {product.map(product => {
+          {product.map((product, i) => {
             return(
-              <Link to={`track/${product._id}`}>
+              <Link key={i} to={`track/${product._id}`}>
               <div key={product._id} className="profile-card">
               {/* <p>{user.products}</p> */}
 
@@ -163,7 +163,14 @@ class Profile extends Component {
 
             )}
             )}
+      </div>
+
               </div>
+              <div className="footer">
+        <h4>Created by:</h4>
+        <p>Sebasgross</p>
+        <a href="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></a>
+      </div>
 
       </div>
     );

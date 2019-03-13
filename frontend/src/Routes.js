@@ -30,11 +30,11 @@ export default ({ isLogged, logIn , logOut, user})=>(<Switch>
     <Route path="/new/imageProfile" component={AddImage} />
     <Route path="/detail/:id" component={Detail} />
     <Route path="/track/:id" component={TrackFood} />
-
     <Route path="/map/direction" component={MapBox} />
     <Route path="/edit/:id" component={Edit} />
     <Route path="/directions/:id" component={Directions} />
     <Route path="/paypal/auth" component={Paypal} />
+
     </Switch>)
 
 

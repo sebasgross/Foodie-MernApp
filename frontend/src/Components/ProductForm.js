@@ -3,7 +3,7 @@ import axios from 'axios'
 import { Input } from 'antd';
 
 //imagwen
-const url = "http://localhost:3000/new/product"
+const url = "https://foodie-el-app.herokuapp.com/new/product"
 const { TextArea } = Input
 class Productform extends React.Component{
     state={
