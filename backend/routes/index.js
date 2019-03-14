@@ -40,9 +40,6 @@ function isLoggedIn(req, res, next) {
   }
 }
 
-router.get('/*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'))
-});
 
 //signup
 router.post("/signup", (req, res, next) => {
@@ -110,7 +107,7 @@ router.get('/profile', isAuth,(req,res,next)=>{
   
   // Product.find({seller:req.user._id})
   .then((user)=>{
-  
+    console.log(user)
     res.status(200).json(user)
   })
   .catch(e=>next(e))
@@ -287,7 +284,11 @@ router.post('/delete/:id', isAuth ,uploadCloud.single('photoURL'),(req,res,next)
   })
   .catch((e)=>next(e))
 })
+
 //index
+router.get('/*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+});
 
 
 

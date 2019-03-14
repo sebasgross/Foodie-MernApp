@@ -17,33 +17,38 @@ class Profile extends Component {
     product:[],
     productsRecipes:[],
     productsChef: [],
-    productsFiltered:[]
+    productsFiltered:[],
+    
   };
 
   componentDidMount() {
-    
+   
      axios.get(url2,{withCredentials:true})
      .then(res=>{
+       console.log(res)
        this.setState({ user: res.data, product: res.data.products})
 
+     })
+
+
+      axios.get(url3,{withCredentials:true})
+      .then(res=>{
        
-       
+ 
+        this.setState({productsChef: res.data.product})
+        const { productsChef } = this.state
+        let filtro = productsChef.filter(item=>item.bought === false)
+        this.setState({productsRecipes: filtro })
+
      
-     })
 
-     axios.get(url3,{withCredentials:true})
-     .then(res=>{
-      console.log(res)
+      })
+      .catch(err=>{
+       console.log(err)
+       this.props.history.push('/login')
+     }) 
 
-       this.setState({productsChef: res.data.product})
-       const { productsChef } = this.state
-       let filtro = productsChef.filter(item=>item.bought === false)
-       this.setState({productsRecipes: filtro})
-     })
-     .catch(err=>{
-      console.log(err)
-      this.props.history.push('/login')
-    }) 
+     
 
   }
 
@@ -55,10 +60,16 @@ class Profile extends Component {
     
   }
 
-
+// componentWillUnmount(){
+//   this.filterProducts()
+// }
   render() {
+
     const { user, product,productsRecipes,productsFiltered } = this.state;
-    console.log(product)
+
+   
+
+    
 
     if (!user) return <div><img src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>;
     if(user.chef && user.coordinates.length === 0){
@@ -71,15 +82,20 @@ class Profile extends Component {
     if(user.chef){
       return(
         <div className="profile-page">
-          
-          <div className="user-card">
           <h2><b>Chef Profile</b></h2>
+          
+          <div className="user-perfil-chef">
+
           <h1>{user.username}</h1>
-          <h4>{user.email}</h4>
+          <h3>{user.email}</h3>
+          <div>
+          <p><b># Recipes : {productsRecipes.length}</b></p>  
+          
+          </div>
           </div>
 
           <div>
-            <Link to="/new/product"> Post your Product </Link>
+            <Link to="/new/product"> Post your Recipe </Link>
           </div>
           <hr></hr>
           <h2>Your Recipes</h2>
@@ -92,6 +108,7 @@ class Profile extends Component {
                 <img height="100"src={product.picture} alt="" />
                 <p>{product.quantity} plates</p>
                 <p> $ {product.price}</p>
+               
                 <p>Click to Edit</p>
                 
 
@@ -102,7 +119,7 @@ class Profile extends Component {
             </div>
 
             <hr></hr>
-            <button onClick={this.filterProducts}>Current Orders</button>
+            <button className="button-current" onClick={this.filterProducts}>Current Orders</button>
 
               <div className="profile-container">
             {productsFiltered.map((product,i)=>{
@@ -130,22 +147,21 @@ class Profile extends Component {
       <div className="user-container">
       <div className="user-pagina">
         <h1>Profile</h1>
-        <div>
-        <p>
-          Username:
-          {user.username}
-          <br />
-          Email:
-          {user.email}
-        </p>
+
+        <div className="user-perfil">
+         <h1> {user.username}</h1>
+        <h3>  {user.email}</h3>
+        <p><b># Orders: {product.length}</b></p>
+        </div>
+        <hr></hr>
+
         <Link to="/home">
         <p>Hungry? Check todays specialties</p>
         </Link>
-        </div>
        
         <h2>Current orders</h2>
 
-        <div  className="profile-container">
+        <div className="profile-container">
     
           {product.map((product, i) => {
             return(

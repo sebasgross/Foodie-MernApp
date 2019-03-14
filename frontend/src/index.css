@@ -19,9 +19,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.app{
-  background-color: black;
-}
+
 .home-button {
   height: 50px;
 }
@@ -30,7 +28,7 @@ code {
   flex-direction: row;
   height: 100vh;
   flex-wrap: wrap;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .home-card {
   height: 300px;
@@ -92,7 +90,7 @@ opacity: 0;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .profile-card:hover{
   opacity: 0.3;
@@ -451,4 +449,26 @@ height: 70vh;
 }
 .user-pagina{
   height: 90vh;
+}
+.user-perfil{
+  /* transform: scale(1.3); */
+  font-size: 130%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-evenly;
+  max-width: 100vw;
+
+}
+.user-perfil-chef{
+  font-size: 130%;
+  /* transform: scale(1.2); */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-content: space-evenly;
+  max-width: 100vw;
+}
+.button-current{
+  transform: scale(1.5)
 }
