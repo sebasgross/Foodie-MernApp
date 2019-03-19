@@ -18,8 +18,7 @@ class Home extends React.Component{
     componentWillMount(){
         let url = "https://foodie-el-app.herokuapp.com/home"
         axios.get(url,{withCredentials:true})
-        .then((res)=>{
-            
+        .then((res)=>{          
             this.setState({products:res.data.product, loader:false})
 
         })
@@ -32,7 +31,6 @@ class Home extends React.Component{
         let url2 = "https://foodie-el-app.herokuapp.com/home/filter?search=" + e.target.value
         axios.get(url2,{withCredentials:true})
         .then((res)=>{
-            console.log(res)
             this.setState({products:res.data})
         })
         .catch((err)=>console.log(err))

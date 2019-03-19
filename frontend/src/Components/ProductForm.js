@@ -16,10 +16,6 @@ class Productform extends React.Component{
         product[e.target.name]=e.target.value
         
         this.setState({product})
-        //validate
-        // errors = {}
-        // if (newUser.password !== newUser.password2) errors.password = "no coinciden"
-        // this.setState({ newUser, errors })
     }
 
     sendToServer = () => {

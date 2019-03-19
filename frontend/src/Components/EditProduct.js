@@ -17,10 +17,8 @@ class Edit extends React.Component{
         const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
 
         axios.get(url, {withCredentials:true})
-        .then((product)=>{
-            console.log(product)
+        .then((product)=>{            
             this.setState({product:product.data.p,id:product.data.p._id, userloggued: product.data.user })
-            console.log(product.data._id)
 
         })
         .catch(err=>console.log(err))
@@ -42,7 +40,6 @@ class Edit extends React.Component{
           
     axios.delete(url4,{withCredentials:true})
     .then(res=>{
-      console.log("deleted")
     })
     .catch((e)=>console.log(e))
   }
@@ -55,7 +52,6 @@ class Edit extends React.Component{
         
             axios.post(url, product, {withCredentials: true})
             .then(()=>{
-                console.log('jola')
                 this.props.history.push('/profile')
             })
             .catch((e)=>{

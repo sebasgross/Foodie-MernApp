@@ -62,7 +62,6 @@ class Direction extends Component {
 
 map.on("load",()=>{
     const {coordinatesTo,coordinatesFrom} = this.state.product
-    console.log(coordinatesTo)
     map._controls[2].actions.setOriginFromCoordinates(coordinatesTo)
     map._controls[2].actions.setDestinationFromCoordinates(coordinatesFrom)
 })
@@ -87,8 +86,7 @@ map.on("load",()=>{
         const {product} =this.state
         const url= `https://foodie-el-app.herokuapp.com/directions/${id}`
             axios.post(url, product, {withCredentials: true})
-            .then(()=>{
-                
+            .then(()=>{             
                 this.props.history.push('/profile')
             })
             .catch((e)=>{

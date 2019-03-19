@@ -37,16 +37,6 @@ class MapBox extends Component {
         zoom: zoom
       })
 
-
-
-
-
-    // addResult=(res)=>{
-    //   // const { newCords } = this.state
-
-    //   this.setState({newCords:[res.result.center[0],res.result.center[1]]})
-    // }
-
     geocoder.on('result',(res) =>{
       // const { newCords} = this.state
     let coordinates = []
@@ -58,9 +48,6 @@ class MapBox extends Component {
     new mapboxgl.Marker()
     .setLngLat(coordinates)
     .addTo(map);
-    console.log(coordinates)
-    console.log(this.state.coordinates)
-
     
 })
 
@@ -80,24 +67,15 @@ class MapBox extends Component {
 
       
     map.addControl(geocoder)
-    // console.log(this.state)
 
     }
 
-
-    // eventHandler=(e)=>{
-    //     let {newUser} = this.state
-    //     newUser[e.target.name] = e.target.value
-    //     this.setState({newUser})
-    // }
    sendToServer=()=>{
      
         let {address, coordinates} = this.state
-        console.log(address)
         let url = "https://foodie-el-app.herokuapp.com/address/user"
         axios.post(url,{address, coordinates},{withCredentials:true})
         .then(user=>{
-            console.log(user)
             toastr.info("Address added")
             this.props.history.push('/profile')
         })

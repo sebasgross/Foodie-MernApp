@@ -107,7 +107,7 @@ router.get('/profile', isAuth,(req,res,next)=>{
   
   // Product.find({seller:req.user._id})
   .then((user)=>{
-    console.log(user)
+   
     res.status(200).json(user)
   })
   .catch(e=>next(e))
@@ -161,7 +161,6 @@ router.get("/home", isAuth, isLoggedIn, (req, res, next) => {
   .populate("seller")
 
   .then((product)=>{
-    
     res.status(200).json({product});
   })
   .catch((err)=>next(err))
@@ -228,8 +227,8 @@ router.post('/directions/:id',isAuth ,(req,res,next)=>{
   
   Product.findByIdAndUpdate(id,{delivered: true}, {new: true})
   .populate('seller')
+
   .then((p) => {
-  console.log(p)
    res.status(200).json(p)
   })
   .catch(e=>console.log(e))
@@ -241,8 +240,8 @@ router.post('/inroute/:id',isAuth ,(req,res,next)=>{
   
   Product.findByIdAndUpdate(id,{track: true}, {new: true})
   .populate('seller')
+
   .then((p) => {
-  console.log(p)
    res.status(200).json(p)
   })
   .catch(e=>console.log(e))
@@ -264,7 +263,6 @@ router.get("/private", isAuth, (req, res, next) => {
 //edit product
 router.post('/edit/:id', isAuth ,uploadCloud.single('photoURL'),(req,res,next)=>{
   const {id} = req.params
-
 
   Product.findByIdAndUpdate(id,{...req.body},{new:true})
   .then((p)=>{
