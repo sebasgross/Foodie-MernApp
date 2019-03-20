@@ -15,7 +15,7 @@ class MapBox extends Component {
     state = {
       lng: -85.14556,
       lat: 22.41944,
-      zoom: 3,
+      zoom: 4,
     coordinates:[],
     address:{}
 
@@ -45,9 +45,7 @@ class MapBox extends Component {
       address = res.result.place_name
      
     this.setState({address,coordinates})
-    new mapboxgl.Marker()
-    .setLngLat(coordinates)
-    .addTo(map);
+  
     
 })
 
@@ -94,6 +92,8 @@ class MapBox extends Component {
         <div style={{ width: '800px', height: '400px' }} ref={e => (this.mapContainer = e)}/>
 
         <button onClick={this.sendToServer}>Add Address</button>
+        <p className="p-only"> Currently only working for Mexico</p>
+
         </div>
       )
     }
