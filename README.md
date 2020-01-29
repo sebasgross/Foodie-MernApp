@@ -1,3 +1,4 @@
 # Foodie-MernApp
-Go check it out in Heroku!
-https://foodie-el-app.herokuapp.com/
+MERN Stack application, which connects chefs nearby with people that want to buy homemade healthy food.
+
+Check out Demo! https://foodie-el-app.herokuapp.com/
