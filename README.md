@@ -1,4 +1,6 @@
 # Foodie-MernApp
+THIS IS PROJECT 3 FROM IRONHACK BOOTCAMP 
+
 MERN Stack application, which connects chefs nearby with people that want to buy homemade healthy food.
 
 Check out Demo! https://foodie-el-app.herokuapp.com/
