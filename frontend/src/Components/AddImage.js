@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import * as toastr from 'toastr';
-const url = "https://foodie-el-app.herokuapp.com/new/imageProfile" 
+const url = "https://foodie-backend.herokuapp.com/new/imageProfile" 
 const serviceUpload  = axios.create({url, withCredentials: true})
 
 

@@ -10,13 +10,15 @@ class Home extends React.Component{
     state={
         products:null,
         loader:true,
-
-        // productsBackup:[],
         user:{}
     }
 
     componentWillMount(){
-        let url = "https://foodie-el-app.herokuapp.com/home"
+        const {user} = this.state
+        if (user === {}) {
+            this.props.history.push('/login')
+        }
+        let url = "https://foodie-backend.herokuapp.com/home"
         axios.get(url,{withCredentials:true})
         .then((res)=>{          
             this.setState({products:res.data.product, loader:false})
@@ -28,7 +30,7 @@ class Home extends React.Component{
 
     getFilter = e => { 
         
-        let url2 = "https://foodie-el-app.herokuapp.com/home/filter?search=" + e.target.value
+        let url2 = "https://foodie-backend.herokuapp.com/home/filter?search=" + e.target.value
         axios.get(url2,{withCredentials:true})
         .then((res)=>{
             this.setState({products:res.data})
@@ -40,7 +42,7 @@ class Home extends React.Component{
 
     render(){
         const {products,user,productsFiltered, loader} = this.state
-        console.log(productsFiltered)
+        console.log(user)
         if(!products || !user || loader) return <div className="home"><img className="icon-pizza" height="200"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>
         return(
             <div className="home">
@@ -60,7 +62,7 @@ class Home extends React.Component{
                <div className="home-plate">    
                                     
                     <h2>Chef: <b>{product.seller.username}</b></h2>
-                    <img height="80"src={product.picture} alt=""/>
+                    <img height="40"src={product.picture} alt=""/>
                     <p><b>{product.name}</b></p>
                     <p># <b>{product.type}</b></p>
                     <p>Exquisite <b>{product.cuisine}</b> cuisine</p>

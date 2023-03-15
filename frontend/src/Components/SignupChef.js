@@ -13,7 +13,7 @@ class SignupChef extends Component{
         let {newUser, errors} = this.state
         newUser[e.target.name] = e.target.value
         errors = {}
-        if (newUser.password !== newUser.password2) errors.password = "no coinciden"
+        if (newUser.password !== newUser.password2) errors.password = "Passwords need to match"
         // console.log(newUser)
         this.setState({ newUser, errors })
     }
@@ -21,7 +21,7 @@ class SignupChef extends Component{
     sendToServer=()=>{
         let {newUser} = this.state
         newUser.chef = true
-        let url = "https://foodie-el-app.herokuapp.com/chef/signup"
+        let url = "https://foodie-backend.herokuapp.com/chef/signup"
         axios.post(url,newUser)
         .then(user=>{
             this.props.history.push('/login')
@@ -53,7 +53,7 @@ class SignupChef extends Component{
             <div className="hello-card"> 
                 <p>Welcome to our team Chef!</p>
           
-                <button onClick={this.sendToServer}><i height="40"class="fas fa-pizza-slice"></i>Registrarse </button>
+                <button onClick={this.sendToServer}>Register</button>
             </div>
             </div>
 

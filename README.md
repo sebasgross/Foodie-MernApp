@@ -5,4 +5,4 @@ MERN Stack application, which connects chefs nearby with people that want to buy
 
 Technologies: React - NodeJs - Mapbox - Paypal Express Checkout - MongoDB - Cloudinary - passport
 
-Check out Demo! https://foodie-el-app.herokuapp.com/
+Check out Demo! https://foodie-backend.herokuapp.com/

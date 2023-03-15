@@ -18,7 +18,8 @@ class App extends Component {
 
   checkLogged() {
   axios
-  .get("https://foodie-el-app.herokuapp.com/private", { withCredentials: true })
+  // .get("https://foodie-backend.herokuapp.com/private", { withCredentials: true })
+  .get("https://foodie-backend.herokuapp.com/private", { withCredentials: true })
   .then(res => {
     this.setState({ isLogged: true , user : res.data.user});
     this.render();
@@ -35,11 +36,13 @@ class App extends Component {
       return (
         <div className="app-container">
           <nav className="navbar-1">
-            <NavLink to="/login">Log in</NavLink>
             <Link to="/">
-          <img height="68"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551978138/logo.png" alt="logo"/>
-          </Link>
-            <NavLink to="/signup">Sign up</NavLink>
+              <img height="68"src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551978138/logo.png" alt="logo"/>
+            </Link>
+            <div className="nav-bar-logs-container">
+              <NavLink to="/login">Log in</NavLink>
+              <NavLink to="/signup">Sign up</NavLink>
+            </div>
           </nav>
 
         
@@ -59,8 +62,6 @@ class App extends Component {
             <NavLink className="logout-press" to={"/logout"}>Logout</NavLink>
             
           </nav>
-=
-     
         </div>
       );
     }
@@ -76,12 +77,10 @@ class App extends Component {
 
     }
 
-    const urlLog = "https://foodie-el-app.herokuapp.com/login"
+    const urlLog = "https://foodie-backend.herokuapp.com/login"
     axios
       .post(urlLog, auth, { withCredentials: true })
       .then(res => {
-        // this.props.history.push('/profile')
-        
         this.setState({ isLogged: true , user:res.data })
       })
       .catch(e => {
@@ -91,7 +90,7 @@ class App extends Component {
   };
 
   logOut = () => {
-    const url = "https://foodie-el-app.herokuapp.com/logout"
+    const url = "https://foodie-backend.herokuapp.com/logout"
     axios.get(url, {withCredentials:true})
     .then(()=>{
         this.setState({isLogged:false})
@@ -104,21 +103,13 @@ class App extends Component {
 
   render() {
     const { isLogged ,user } = this.state;
-    // if(!isLogged){
-    //   return(
-    //     <div>
-        
-    // {this.navDraw()}
-    //     </div>
-    //   )
-    // }
+
     return <div className="App">
 
     {this.navDraw()}
     
     <Routes isLogged={isLogged} logOut={this.logOut} logIn={this.logIn} map={this.mapContainer} user={user} />
    
-      
 
     </div>;
   }

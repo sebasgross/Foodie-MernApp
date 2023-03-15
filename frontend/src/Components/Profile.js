@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 
 
 const profile = "profile"
-const url2 = "https://foodie-el-app.herokuapp.com/" + profile
+const url2 = "https://foodie-backend.herokuapp.com/" + profile
 const chefprofile = "profile/products"
-const url3 = "https://foodie-el-app.herokuapp.com/" + chefprofile
+const url3 = "https://foodie-backend.herokuapp.com/" + chefprofile
 // const borrar = "delete/product" 
 
 
@@ -66,10 +66,6 @@ class Profile extends Component {
   render() {
 
     const { user, product,productsRecipes,productsFiltered } = this.state;
-
-   
-
-    
 
     if (!user) return <div><img src="https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981388/loading-pizzagiphy.gif" alt="pizza-loader" /></div>;
     if(user.chef && user.coordinates.length === 0){
@@ -183,10 +179,10 @@ class Profile extends Component {
 
               </div>
               <div className="footer">
-        <h4>Created by:</h4>
-        <p>Sebasgross</p>
-        <a href="https://github.com/sebasgross"> <img height="80"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></a>
-      </div>
+                <h4>Created by:</h4>
+                <p>Sebasgross</p>
+                <a href="https://github.com/sebasgross"> <img height="40"src="http://res.cloudinary.com/dpt8pbi8n/image/upload/v1552275075/github-logo.png" alt="github-logo" /> <p>Sebasgross</p></a>
+              </div>
 
       </div>
     );

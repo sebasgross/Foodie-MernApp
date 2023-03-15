@@ -71,7 +71,7 @@ class MapBox extends Component {
    sendToServer=()=>{
      
         let {address, coordinates} = this.state
-        let url = "https://foodie-el-app.herokuapp.com/address/user"
+        let url = "https://foodie-backend.herokuapp.com/address/user"
         axios.post(url,{address, coordinates},{withCredentials:true})
         .then(user=>{
             toastr.info("Address added")

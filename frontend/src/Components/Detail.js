@@ -11,7 +11,7 @@ class Detail extends React.Component{
 
     componentDidMount(){
         let { id } = this.props.match.params
-        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
+        const url= `https://foodie-backend.herokuapp.com/detail/${id}`
         
         axios.get(url, {withCredentials:true})
         .then((product)=>{   
@@ -21,10 +21,10 @@ class Detail extends React.Component{
     }
      addRequest = ()=>{
         // // let { id } = this.state
-        // const url= `https://foodie-el-app.herokuapp.com/detail/` + id
+        // const url= `https://foodie-backend.herokuapp.com/detail/` + id
         let { id } = this.props.match.params
         const {userloggued} =this.state
-        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
+        const url= `https://foodie-backend.herokuapp.com/detail/${id}`
         if(userloggued.coordinates.length > 0){
             axios.post(url, userloggued, {withCredentials: true})
             .then(()=>{

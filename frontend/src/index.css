@@ -70,7 +70,7 @@ align-items: center;
   font-size: 120%;
   border-radius: 25px;
   border: 1px solid black;
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
   padding: 5px;
   
 }
@@ -85,7 +85,7 @@ opacity: 0;
 }
 .profile-container {
 
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -118,7 +118,7 @@ opacity: 0;
 
 }
 .user-container{
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
 
 }
 .detail-type {
@@ -134,7 +134,7 @@ opacity: 0;
 .login-container {
   /* background-image: url("https://res.cloudinary.com/dpt8pbi8n/image/upload/v1551981106/giphypizzaa.gif"); */
   height: 100vh;
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
   font-size: 140%;
 }
 .login-card {
@@ -161,9 +161,15 @@ opacity: 0;
   margin: 0;
   padding: 0;
 }
+
+.nav-bar-logs-container {
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
 .navbar-1 {
   margin: 0;
-  padding: 0;
+  padding: 0 150px 0 200px;
   width: 100%;
   height: 70px;
   background-color: white;
@@ -171,13 +177,12 @@ opacity: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Passion One", cursive;
+  font-family: "trebuchet ms", sans-serif;
   font-size: 200%;
-  padding: 0 10px 0 10px;
 }
 .navbar-2 {
   margin: 0;
-  padding: 0;
+  padding: 0 200px 0 200px;
   width: 100%;
   height: 70px;
   background-color: white;
@@ -185,9 +190,8 @@ opacity: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Passion One", cursive;
+  font-family: "trebuchet ms", sans-serif;
   font-size: 180%;
-  padding: 0 10px 0 10px;
 }
 @media (max-width: 600px){
   .navbar-2 {
@@ -200,7 +204,7 @@ opacity: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Passion One", cursive;
+    font-family: "trebuchet ms", sans-serif;
     font-size: 130%;
     padding: 0 10px 0 10px;
 
@@ -241,13 +245,13 @@ opacity: 0;
 }
 .home-plate {
   color: black;
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
 }
 .home-plate:hover{
   opacity: .4;
 }
 .home > h1 {
-  font-family: "Passion One", cursive;
+  font-family: "trebuchet ms", sans-serif;
   font-size: 300%;
 }
 .example-input {
@@ -256,7 +260,7 @@ opacity: 0;
   justify-content: space-evenly;
   width: 400px;
   height: 320px;
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
 
 }
 .example-input >h2{
@@ -293,30 +297,25 @@ opacity: 0;
   justify-content: center;
 }
 .image-container{
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 400px;
   height: 300px;
   margin: 5px;
+  
 }
 
  .index-container{
   margin: 5px 20px 0 20px; 
-  background-color: #eee9e9;
-  /* width: 100%; */
-  /* display: flex; */
-  /* justify-content: center; */
-} 
-.carousel{
-  width: 100%;
-  height: 82vh;
+  background-color: white;
 
-}
+} 
 .section2-container{
   margin: 10px 0 0 0;
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
+  
 
 }
 .section-2{
@@ -347,7 +346,7 @@ opacity: 0;
   }
   .section2-container{
     margin: 10px 0 0 0;
-    font-family: "Overpass", sans-serif;
+    font-family: "trebuchet ms", sans-serif;
   }
   .carousel{
     width: 100%;
@@ -357,12 +356,20 @@ opacity: 0;
   transform: scale(0.7);
 }
 }
+.icons-image {
+  margin-bottom: 10px;
+}
 .icons-child{
-  height: 20vh;
-  width: 35vw;
+  height: 100%;
+  width: 400px;
+  margin: 15px;
+}
+.icons-child p {
+  height: 100px;
+  text-align: bottom;
 }
 .section3-container{
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
 
   margin: 20px 0 20px 0;
 }
@@ -373,9 +380,9 @@ opacity: 0;
   margin: 0 25px 0 25px;
 }
 .footer{
-  font-family: "Overpass", sans-serif;
+  font-family: "trebuchet ms", sans-serif;
   margin: 5px 0 5px 0;
-  height: 28vh;
+  height: 15vh;
   width: 100%;
   background-color: gray;
   display: flex;
@@ -481,4 +488,80 @@ height: 70vh;
 .p-only{
   color: red;
   font-size: 140%;
+}
+
+.over-fold-container {
+  height: 60vh;
+  padding: 0 250px 0 350px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid black;
+  margin-bottom: 100px ;
+}
+
+.over-fold-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  height: 400px;
+}
+
+.over-fold-text-container h1{
+font-size: 50px;
+}
+
+.over-fold-text-container p{
+  font-size: 22px;
+}
+
+/* CSS */
+.button-6 {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
 }

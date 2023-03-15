@@ -11,7 +11,7 @@ class TrackFood extends React.Component{
 
     componentDidMount(){
         let { id } = this.props.match.params
-        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
+        const url= `https://foodie-backend.herokuapp.com/detail/${id}`
         
         axios.get(url, {withCredentials:true})
         .then((product)=>{

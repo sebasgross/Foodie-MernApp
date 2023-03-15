@@ -14,7 +14,7 @@ class Edit extends React.Component{
 
     componentDidMount(){
         let { id } = this.props.match.params
-        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
+        const url= `https://foodie-backend.herokuapp.com/detail/${id}`
 
         axios.get(url, {withCredentials:true})
         .then((product)=>{            
@@ -36,7 +36,7 @@ class Edit extends React.Component{
 
       borrarProduct = () =>{
         let { id } = this.props.match.params    
-        const url4 = `https://foodie-el-app.herokuapp.com/delete/${id}` 
+        const url4 = `https://foodie-backend.herokuapp.com/delete/${id}` 
           
     axios.delete(url4,{withCredentials:true})
     .then(res=>{
@@ -45,10 +45,10 @@ class Edit extends React.Component{
   }
      sendToServer = ()=>{
         // // let { id } = this.state
-        // const url= `https://foodie-el-app.herokuapp.com/detail/` + id
+        // const url= `https://foodie-backend.herokuapp.com/detail/` + id
         let { id } = this.props.match.params
         const {product} =this.state
-        const url= `https://foodie-el-app.herokuapp.com/edit/${id}`
+        const url= `https://foodie-backend.herokuapp.com/edit/${id}`
         
             axios.post(url, product, {withCredentials: true})
             .then(()=>{

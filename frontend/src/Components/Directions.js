@@ -33,7 +33,7 @@ class Direction extends Component {
     componentDidMount() {
 
         let { id } = this.props.match.params
-        const url= `https://foodie-el-app.herokuapp.com/detail/${id}`
+        const url= `https://foodie-backend.herokuapp.com/detail/${id}`
 
         axios.get(url, {withCredentials:true})
         .then((product)=>{
@@ -84,7 +84,7 @@ map.on("load",()=>{
 
         let { id } = this.props.match.params
         const {product} =this.state
-        const url= `https://foodie-el-app.herokuapp.com/directions/${id}`
+        const url= `https://foodie-backend.herokuapp.com/directions/${id}`
             axios.post(url, product, {withCredentials: true})
             .then(()=>{             
                 this.props.history.push('/profile')
@@ -97,7 +97,7 @@ map.on("load",()=>{
 
       let { id } = this.props.match.params
       const {product} =this.state
-      const url= `https://foodie-el-app.herokuapp.com/inroute/${id}`
+      const url= `https://foodie-backend.herokuapp.com/inroute/${id}`
           axios.post(url, product, {withCredentials: true})
           .then(()=>{
               this.props.history.push('/profile')
